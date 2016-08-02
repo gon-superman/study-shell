@@ -1,0 +1,2 @@
+expect需要Tcl编程语言的支持，要在系统上运行expect必须首先安装Tcl。
+tcl-version.rpm
