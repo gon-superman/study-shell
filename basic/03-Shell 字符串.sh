@@ -31,3 +31,24 @@ echo ${your_name:1:4}
 echo `expr index "${your_name}" ht`
 echo `expr index "$your_name" Ht`
 
+
+str="abcAbc123ABC123"
+
+#子串削除
+#${string#substring} 从 $string 的 开头 位置截掉最短匹配的 $substring .
+#${string##substring}从 $string 的 开头 位置截掉最长匹配的 $substring
+
+echo ${str#a*c} #Abc123ABC123
+echo ${str##a*c} #123ABC123
+
+#${string%substring} 从 $string 的 结尾 位置截掉最短匹配的 $substring
+#${string%%substring}从 $string 的 结尾 位置截掉最长匹配的 $substring
+
+echo ${str%1*3} #abcAbc123ABC
+echo ${str%%1*3} #abcAbc
+
+#Replace
+echo ${str/12/D} #abcAbcD3ABC123
+echo ${str//12/D} #abcAbcD3ABCD3
+
+
