@@ -51,4 +51,7 @@ echo ${str%%1*3} #abcAbc
 echo ${str/12/D} #abcAbcD3ABC123
 echo ${str//12/D} #abcAbcD3ABCD3
 
-
+#${var/#Pattern/Replacement} 前缀匹配 Pattern
+echo ${str/#a*c/D} #D123ABC123
+#${var/#Pattern/Replacement} 后缀匹配 Pattern
+echo ${str/%1*3/D} #abcAbcD
