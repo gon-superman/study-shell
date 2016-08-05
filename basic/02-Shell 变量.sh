@@ -14,7 +14,7 @@ echo ${your_name}
 
 #只读变量
 my_name='root'
-readonly my_name
+#readonly my_name
 my_name='penghui.qu' #throw exception 'my_name: readonly variable'
 
 #删除变量(变量被删除后不能再次使用,unset 命令不能删除只读变量。)
@@ -35,3 +35,33 @@ echo $JAVA_HOME
 echo $PATH
 echo $M2_HOME
 
+echo ${parameter-'default'}; #如果变量parameter没被声明, 那么就使用默认值
+echo ${parameter:-'default'}; #如果变量parameter没被声明, 那么就使用默认值
+echo ${username-`whoami`}; #如果变量$username还没有被声明, 那么就echo出`whoami`的结果
+
+#${parameter-default} 和 ${parameter:-default} 在绝大多数的情况下都是
+#相同的. 只有在 parameter 已经被声明, 但是被赋null值得时候, 这个额外
+#的:才会产生不同的结果
+
+parameter=
+echo "-" ${parameter-'default'}; #
+echo ":-" ${parameter:-'default'}; #default
+
+parameter1="a"
+echo "+" ${parameter1+'alt_value'}; #如果变量parameter被声明了, 那么就使用 alt_value , 否则就使用null字符串.
+echo ":+" ${parameter1:+'alt_value'}; #如果变量parameter被设置了, 那么就使用 alt_value , 否则就使用null字符串.
+
+#这两种形式绝大多数情况下都一样. 只有在 parameter 被声明并且设置为null值的时候, 多出来的
+#这个:才会引起这两种形式的不同
+
+parameter1=
+echo "+" ${parameter1+'alt_value'}; #alt_value
+echo ":+" ${parameter1:+'alt_value'}; #
+
+parameter2="B"
+echo "?" ${parameter2?err_msg} #如果parameter已经被声明, 那么就使用设置的值, 否则打印err_msg
+echo ":?" ${parameter2:?err_msg} #如果parameter已经被设置, 那么就使用设置的值, 否则打印err_msg
+
+parameter2=
+echo "?" ${parameter2?err_msg} #
+echo ":?" ${parameter2:?err_msg} #throw exception
