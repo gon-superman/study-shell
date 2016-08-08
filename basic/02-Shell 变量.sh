@@ -14,7 +14,7 @@ echo ${your_name}
 
 #只读变量
 my_name='root'
-#readonly my_name
+#readonly my_name / declare -r my_name
 my_name='penghui.qu' #throw exception 'my_name: readonly variable'
 
 #删除变量(变量被删除后不能再次使用,unset 命令不能删除只读变量。)
@@ -64,4 +64,29 @@ echo ":?" ${parameter2:?err_msg} #如果parameter已经被设置, 那么就使�
 
 parameter2=
 echo "?" ${parameter2?err_msg} #
-echo ":?" ${parameter2:?err_msg} #throw exception
+#echo ":?" ${parameter2:?err_msg} #throw exception
+
+
+#指定变量的类型: 使用declare或者typeset
+#declare/typeset选项:
+#-r  只读
+#-i  整型
+#-a  数组
+#-f  函数
+#-x export 声明一个变量, 并作为这个脚本的环境变量被导出
+#-x var=$value declare命令允许在声明变量类型的同时给变量赋值
+
+
+
+#变量的间接引用
+var=abc
+abc=ddd
+
+# 直接引用
+echo "var:$var";
+
+# 间接引用
+eval var=\$$var
+echo "Now var:$var"
+
+
